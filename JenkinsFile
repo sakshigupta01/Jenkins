@@ -1,0 +1,15 @@
+
+pipeline {
+    stages {
+        stage('Checkout code') {
+            git branch: 'main', credentialsId: 'user', url: 'https://github.com/sakshigupta01/Jenkins.git'
+        }
+        stage('Restore Nuget') {
+            bat 'cd Jenkins2 && "C:\\tools\\nuget.exe" restore Jenkins2.sln'
+        }
+        stage('Build') {    
+            bat "cd Jenkins2 && dotnet build"
+        }
+        
+    }
+}
